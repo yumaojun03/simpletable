@@ -3,7 +3,6 @@ package simpletable
 import (
 	"fmt"
 	"strings"
-	"unicode/utf8"
 )
 
 // content is a cell content
@@ -12,12 +11,28 @@ type content struct {
 	w int      // meta content width
 }
 
+// get the string width
+func getStringWidth(str string) int {
+	w := 0
+
+	for _, c := range []rune(str) {
+		if IsHalfwidth(c) {
+			w = w + 1
+		} else {
+			w = w + 2
+		}
+
+	}
+
+	return w
+}
+
 // width returns maximum content lines width
 func (c *content) maxLinewidth() int {
 	w := 0
 
 	for _, r := range c.c {
-		l := utf8.RuneCountInString(r)
+		l := getStringWidth(r)
 		if l > w {
 			w = l
 		}
@@ -71,7 +86,7 @@ func (c *content) lines(a int) []string {
 
 // line formats content line
 func (c *content) line(l string, a int) string {
-	len := c.width() - utf8.RuneCountInString(l)
+	len := c.width() - getStringWidth(l)
 	if len <= 0 {
 		return l
 	}
