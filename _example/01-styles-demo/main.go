@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/alexeyco/simpletable"
+	"simpletable"
 )
 
 var (
@@ -18,6 +18,7 @@ var (
 		{8, "Daniel L. Love", "978-210-4178", "DanielLLove@rhyta.com", 44},
 		{9, "Julie T. Dial", "719-966-5354", "JulieTDial@jourrapide.com", 8},
 		{10, "Juan J. Kennedy", "908-910-8893", "JuanJKennedy@dayrep.com", 16},
+		{11, "中文夹渣 abc", "特殊字符夹渣 ℃", "JuanJKennedy@dayrep.com", 16},
 	}
 
 	styles = map[string]*simpletable.Style{
